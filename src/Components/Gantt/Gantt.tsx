@@ -1,6 +1,6 @@
 /*eslint "@typescript-eslint/no-unused-vars": "off" */
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { getYesterdayPosition } from './GanttTaskHelper'
 
@@ -31,6 +31,8 @@ const Gantt = (props: Props) => {
 
     const num_days_top = 32
     const cell_days_top = 48
+
+    const [ scrolled, setScrolled ] = useState(false)
 
     const getMonths = () => {
 
@@ -83,14 +85,16 @@ const Gantt = (props: Props) => {
 
     const scrollToday = () => {
 
-        const yesterdayPosition = getYesterdayPosition(props.start)
+        if (scrolled) return
 
-        container.current.scrollLeft = yesterdayPosition
-    }
+        setTimeout(() => {
+    
+            const yesterdayPosition = getYesterdayPosition(props.start)
+    
+            container.current.scrollLeft = yesterdayPosition
 
-    const _onReorder = (tasks: any) => {
-
-        console.log({ tasks })
+            setScrolled(true)
+        }, 100)
     }
 
     useEffect(scrollToday, [ props.tasks ])
