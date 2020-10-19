@@ -5,6 +5,9 @@ import Gantt from './Components/Gantt/Gantt'
 
 const App = () => {
 
+    const [ start, setStart ] = useState('')
+    const [ end, setEnd ] = useState('')
+
     const [ tasks, setTasks ] = useState([
         {
             _id: '01.00.00',
@@ -56,11 +59,17 @@ const App = () => {
         },
     ])
 
+    setTimeout(() => {
+
+        setStart('2020-09-01')
+        setEnd('2020-12-31')
+    }, 100)
+
     return (
         <div>
             <Gantt
-                start="2020-09-01"
-                end="2020-12-31"
+                start={start}
+                end={end}
                 day_width={46}
                 tasks={tasks}
                 onReorder={(_tasks: any) => setTasks(_tasks)}
@@ -99,9 +108,6 @@ const App = () => {
                     ]
                 }}
             />
-            <ul>
-                <li>Agregar flechas</li>
-            </ul>
         </div>
     )
 }

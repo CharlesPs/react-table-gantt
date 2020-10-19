@@ -94,10 +94,25 @@ const Gantt = (props: Props) => {
             container.current.scrollLeft = yesterdayPosition
 
             setScrolled(true)
-        }, 100)
+        }, 0)
     }
 
-    useEffect(scrollToday, [ props.tasks ])
+    const onGanttReady = () => {
+
+
+        if (!props.start || !props.end) {
+
+            setTimeout(() => {
+
+                onGanttReady()
+            }, 0)
+        } else {
+
+            scrollToday()
+        }
+    }
+
+    useEffect(onGanttReady, [ props.start, props.end, props.tasks ])
 
     return (
         <div style={{

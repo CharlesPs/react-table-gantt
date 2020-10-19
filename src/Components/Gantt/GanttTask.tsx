@@ -41,7 +41,7 @@ const GanttTask = (props: any) => {
         setTextOut(isBigger)
     }
 
-    useEffect(getTaskPosition, [ props.task ])
+    useEffect(getTaskPosition, [ props.start, props.days, props.task ])
 
     return (
         <g className="gantt-task">
