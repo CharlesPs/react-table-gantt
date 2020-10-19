@@ -21,7 +21,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": false
   },
   "exclude": [
     "node_modules",
@@ -30,7 +30,4 @@
     "jest.config.js",
     "lib"
   ],
-  "include": [
-    "src"
-  ]
 }

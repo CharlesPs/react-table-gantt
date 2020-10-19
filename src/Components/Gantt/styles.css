@@ -1,0 +1,102 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Nunito",sans-serif;
+    font-weight: 400;
+}
+
+.gantt {
+    overflow: auto;
+    position: relative;
+}
+
+.gantt-table {
+    padding: 0;
+    font-size: 14px;
+    letter-spacing: .8px;
+}
+.gantt-table th {
+    background-color: #f5f1f1;
+    height: 56px;
+    padding-bottom: 3px;
+    vertical-align: bottom;
+}
+.gantt-table tbody .reorder-icon {
+    cursor: all-scroll;
+    height: 32px;
+    vertical-align: -5px;
+}
+.gantt-table tbody tr:nth-child(1n) {
+    background-color: #fff;
+}
+.gantt-table tbody tr:nth-child(2n) {
+    background-color: #f5f1f1;
+}
+.gantt-table td {
+    font-weight: 600;
+    height: 38px;
+}
+
+.gantt .gantt-grid .grid-day-hightlight {
+    fill: #fcf8e3;
+}
+
+.gantt .gantt-grid .grid-month {
+    fill: #f5f1f1;
+    /* stroke: #333; */
+    height: 32px;
+}
+.gantt .gantt-grid .grid-day {
+    fill: #f5f1f1;
+    /* stroke: #333; */
+    height: 24px;
+}
+.gantt .gantt-grid .grid-row {
+    fill: #fff;
+    height: 38px;
+    width: 100%;
+}
+.gantt .gantt-grid .grid-row:nth-child(2n) {
+    fill: #f5f1f1;
+}
+.gantt .gantt-header .day {
+    fill: #333;
+    font-size: 12px;
+}
+.gantt .gantt-body {
+}
+.gantt .gantt-body .gantt-task {
+    cursor: pointer;
+}
+.gantt .gantt-body .gantt-task .gantt-task-rect {
+    height: 24px;
+    min-width: 46px;
+    stroke: #8d99a6;
+    transition: stroke-width .3s ease
+}
+.gantt .gantt-body .gantt-task:hover .gantt-task-rect {
+    stroke-width: 2;
+}
+.gantt .gantt-body .gantt-task .gantt-task-title {
+    fill: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .8px;
+}
+.gantt .gantt-body .gantt-task .gantt-task-title.dark {
+    fill: #333;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+
+    .gantt-table {
+        width: auto;
+    }
+    .hide-on-mobile {
+        display: none;
+    }
+}
