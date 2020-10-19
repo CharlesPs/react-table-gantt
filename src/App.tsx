@@ -59,8 +59,8 @@ const App = () => {
     return (
         <div>
             <Gantt
-                start="2020-09-30"
-                end="2020-12-01"
+                start="2020-09-01"
+                end="2020-12-31"
                 day_width={46}
                 tasks={tasks}
                 onReorder={(_tasks: any) => setTasks(_tasks)}
