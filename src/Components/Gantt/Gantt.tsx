@@ -21,6 +21,7 @@ type Props = {
     end: string,
     day_width: number,
     tasks: any,
+    onTaskClick?: any,
     onReorder: any,
     table?: any,
 }
@@ -99,7 +100,6 @@ const Gantt = (props: Props) => {
 
     const onGanttReady = () => {
 
-
         if (!props.start || !props.end) {
 
             setTimeout(() => {
@@ -111,6 +111,8 @@ const Gantt = (props: Props) => {
             scrollToday()
         }
     }
+
+    const onTaskClick = props.onTaskClick ? props.onTaskClick : () => null
 
     useEffect(onGanttReady, [ props.start, props.end, props.tasks ])
 
@@ -140,6 +142,7 @@ const Gantt = (props: Props) => {
                         start={props.start}
                         days={getDays()} 
                         tasks={props.tasks}
+                        onTaskClick={(task: any, i: number) => onTaskClick(task, i)}
                     />
                 </svg>
             </div>

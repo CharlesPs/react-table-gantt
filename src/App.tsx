@@ -72,6 +72,7 @@ const App = () => {
                 end={end}
                 day_width={46}
                 tasks={tasks}
+                onTaskClick={(task: any, i: number) => console.log({ task, i })}
                 onReorder={(_tasks: any) => setTasks(_tasks)}
                 table={{
                     width: 500,

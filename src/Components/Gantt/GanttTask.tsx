@@ -45,7 +45,7 @@ const GanttTask = (props: any) => {
 
     return (
         <g className="gantt-task">
-            <g>
+            <g onClick={() => props.onTaskClick(props.task)}>
                 <rect className="gantt-task-rect" 
                     ref={boxEl}
                     rx={5}

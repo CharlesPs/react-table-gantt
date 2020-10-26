@@ -14,6 +14,7 @@ const GanttBody = (props: any) => {
                     posX={i}
                     posY={i}
                     paddingTop={7}
+                    onTaskClick={(task: any) => props.onTaskClick(task, i)}
                 />
             ))}
         </g>
