@@ -5,6 +5,7 @@ declare type Props = {
     end: string;
     day_width: number;
     tasks: any;
+    onTaskClick?: any;
     onReorder: any;
     table?: any;
 };
