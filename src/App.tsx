@@ -1,9 +1,14 @@
 
 import React, { useState } from 'react'
 
+import Modal from 'react-bootstrap/Modal'
 import Gantt from './Components/Gantt/Gantt'
 
 const App = () => {
+
+    const [ state, setState ] = useState({
+        showEditModal: false,
+    })
 
     const [ start, setStart ] = useState('')
     const [ end, setEnd ] = useState('')
@@ -67,6 +72,13 @@ const App = () => {
 
     return (
         <div>
+            <div>
+                <button className="btn btn-raised btn-raised-secondary"
+                    onClick={() => setState({ ...state, showEditModal: true })}
+                >
+                    Add Task
+                </button>
+            </div>
             <Gantt
                 start={start}
                 end={end}
@@ -109,6 +121,21 @@ const App = () => {
                     ]
                 }}
             />
+
+            <Modal show={state.showEditModal}
+                onHide={() => setState({ ...state, showEditModal: false })}
+            >
+                <Modal.Body>
+                    sss
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="btn btn-raised btn-raised-secondary"
+                        onClick={() => setState({ ...state, showEditModal: false })}
+                    >
+                        Cerrar
+                    </button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
