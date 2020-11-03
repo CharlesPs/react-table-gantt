@@ -2,9 +2,20 @@
 import React, { useState } from 'react'
 
 import Modal from 'react-bootstrap/Modal'
+
+import moment from 'moment'
+import 'moment/locale/es'
+
 import Gantt from './Components/Gantt/Gantt'
 
 const App = () => {
+
+    moment.locale('es')
+    moment.updateLocale('es', {
+        week: {
+            dow: 1
+        }
+    })
 
     const [ state, setState ] = useState({
         showEditModal: false,
