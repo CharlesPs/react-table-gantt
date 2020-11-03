@@ -48,7 +48,7 @@ const GanttGrid = (props: any) => {
             </g>
             <g>
                 {props.tasks.map((_task: any, i: number) => (
-                    <rect key={i} className="grid-row" x={0} y={(i * 38) + 56}></rect>
+                    <rect key={i} className="grid-row" x={0} y={(i * 38) + 56} width={props.day_width * props.days.length}></rect>
                 ))}
             </g>
             {thereIsTodayHighlight(props.start, props.end)}
