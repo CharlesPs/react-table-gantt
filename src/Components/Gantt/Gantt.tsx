@@ -119,8 +119,13 @@ const Gantt = (props: Props) => {
     return (
         <div style={{
             display: 'flex',
+            width: '100%'
         }}>
-            <GanttTable table={props.table} tasks={props.tasks} onReorder={(tasks: any) => props.onReorder(tasks)} />
+            <GanttTable 
+                table={props.table} 
+                tasks={props.tasks} 
+                onReorder={(tasks: any) => props.onReorder(tasks)} 
+            />
             <div className="gantt" ref={container}>
                 <svg height={38 * props.tasks.length + 56} width={getDays().length * props.day_width}>
                     <GanttGrid 
