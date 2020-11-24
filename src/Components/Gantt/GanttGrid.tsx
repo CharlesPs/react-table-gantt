@@ -53,6 +53,20 @@ const GanttGrid = (props: any) => {
             </g>
             {thereIsTodayHighlight(props.start, props.end)}
             <g>
+                {props.days.map((_day: any, i: number) => {
+
+                    if (_day.weekday === '0') {
+
+                        return (
+                            <rect key={i} className="grid-day-sunday"
+                                x={i * props.day_width} 
+                                y={0}
+                                height={(props.tasks.length * 38) + 56} 
+                                width={props.day_width} 
+                            />
+                        )
+                    }
+                })}
                 <rect className="grid-day-hightlight" 
                     x={getTodayPosition(props.start)} 
                     y={0} 

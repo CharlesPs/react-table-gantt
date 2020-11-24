@@ -44,6 +44,10 @@ body {
     fill: #fcf8e3;
 }
 
+.gantt .gantt-grid .grid-day-sunday {
+    fill: #d4d4d0c4;
+}
+
 .gantt .gantt-grid .grid-month {
     fill: #f5f1f1;
     /* stroke: #333; */

@@ -75,7 +75,8 @@ const Gantt = (props: Props) => {
         while (day.isSameOrBefore(props.end)) {
             
             days.push({
-                d: day.date()
+                d: day.date(),
+                weekday: day.format('d')
             })
 
             day.add(1, 'day')
@@ -127,7 +128,10 @@ const Gantt = (props: Props) => {
                 onReorder={(tasks: any) => props.onReorder(tasks)} 
             />
             <div className="gantt" ref={container}>
-                <svg height={38 * props.tasks.length + 56} width={getDays().length * props.day_width}>
+                <svg 
+                    height={38 * props.tasks.length + 56} 
+                    width={getDays().length * props.day_width}
+                >
                     <GanttGrid 
                         start={props.start}
                         end={props.end}
@@ -147,6 +151,7 @@ const Gantt = (props: Props) => {
                         start={props.start}
                         days={getDays()} 
                         tasks={props.tasks}
+                        day_width={props.day_width}
                         onTaskClick={(task: any, i: number) => onTaskClick(task, i)}
                     />
                 </svg>
