@@ -1,6 +1,6 @@
 {
   "name": "react-table-gantt",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "main": "lib/library.js",
   "types": "lib/library.d.ts",
