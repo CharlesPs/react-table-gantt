@@ -1,161 +1,50 @@
-/*eslint "@typescript-eslint/no-unused-vars": "off" */
 
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 
-import { getYesterdayPosition } from './GanttTaskHelper'
+import { fixRelationsDates } from '../../Helpers/GanttChartFunctions'
 
-import GanttTable from './GanttTable'
-import GanttGrid from './GanttGrid'
-import GanttHeader from './GanttHeader'
-import GanttBody from './GanttBody'
-
-import './styles.css'
-
-import moment from 'moment'
-moment.locale('es', {
-    months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Setiembre_Octubre_Noviembre_Diciembre'.split('_')
-})
+import GanttTable from '../GanttTable/GanttTable'
+import GanttChart from '../GanttChart/GanttChart'
 
 type Props = {
     start: string,
     end: string,
-    day_width: number,
     tasks: any,
-    onTaskClick?: any,
-    onReorder: any,
-    table?: any,
+    adjustRelations?: boolean,
+    onItemClick?: any,
+    onModifyTasks?: any,
+    table: any,
+    styles: any,
+    locale: any,
 }
 
 const Gantt = (props: Props) => {
 
-    const container:any = useRef(null)
-
-    const num_days_top = 32
-    const cell_days_top = 48
-
-    const [ scrolled, setScrolled ] = useState(false)
-
-    const getMonths = () => {
-
-        const months: any = []
-
-        let day = moment(props.start)
-
-        while (day.isSameOrBefore(props.end)) {
-            
-            const month: any = {
-                m: day.month(),
-                code: day.format('YYYY-MM'),
-                name: day.format('MMMM')
-            }
-
-            const filter = months.filter((_month: any) => _month.code === month.code)
-
-            if (!months.filter((_month: any) => _month.code === month.code).length) {
-
-                month.days = 1
-                months.push(month)
-            } else {
-
-                filter[0].days += 1
-            }
-
-            day.add(1, 'day')
-        }
-
-        return months
-    }
-
-    const getDays = () => {
-
-        const days = []
-
-        let day = moment(props.start)
-
-        while (day.isSameOrBefore(props.end)) {
-            
-            days.push({
-                d: day.date(),
-                weekday: day.format('d')
-            })
-
-            day.add(1, 'day')
-        }
-
-        return days
-    }
-
-    const scrollToday = () => {
-
-        if (scrolled) return
-
-        setTimeout(() => {
-    
-            const yesterdayPosition = getYesterdayPosition(props.start)
-    
-            container.current.scrollLeft = yesterdayPosition
-
-            setScrolled(true)
-        }, 0)
-    }
-
-    const onGanttReady = () => {
-
-        if (!props.start || !props.end) {
-
-            setTimeout(() => {
-
-                onGanttReady()
-            }, 0)
-        } else {
-
-            scrollToday()
-        }
-    }
-
-    const onTaskClick = props.onTaskClick ? props.onTaskClick : () => null
-
-    useEffect(onGanttReady, [ props.start, props.end, props.tasks ])
+    const ganttItems = props.adjustRelations ? fixRelationsDates(props.tasks) : props.tasks
 
     return (
-        <div style={{
-            display: 'flex',
-            width: '100%'
-        }}>
-            <GanttTable 
-                table={props.table} 
-                tasks={props.tasks} 
-                onReorder={(tasks: any) => props.onReorder(tasks)} 
+        <div
+            style={{
+                display: 'flex',
+                overflow: 'hidden',
+            }}
+        >
+            <GanttTable
+                tasks={ganttItems}
+                table={props.table}
+                onItemClick={(task: any) => props.onItemClick(task)}
+                onModifyTasks={(tasks: any) => props.onModifyTasks(tasks)}
+                headerHeight={props.styles.headerHeight}
+                rowHeight={props.styles.rowHeight}
+                styles={props.styles}
             />
-            <div className="gantt" ref={container}>
-                <svg 
-                    height={38 * props.tasks.length + 56} 
-                    width={getDays().length * props.day_width}
-                >
-                    <GanttGrid 
-                        start={props.start}
-                        end={props.end}
-                        days={getDays()} 
-                        day_top={num_days_top}
-                        day_width={props.day_width}
-                        months={getMonths()}
-                        tasks={props.tasks}
-                    />
-                    <GanttHeader 
-                        days={getDays()} 
-                        day_top={cell_days_top}
-                        day_width={props.day_width} 
-                        months={getMonths()}
-                    />
-                    <GanttBody
-                        start={props.start}
-                        days={getDays()} 
-                        tasks={props.tasks}
-                        day_width={props.day_width}
-                        onTaskClick={(task: any, i: number) => onTaskClick(task, i)}
-                    />
-                </svg>
-            </div>
+            <GanttChart
+                start={props.start}
+                end={props.end}
+                ganttItems={ganttItems}
+                styles={props.styles}
+                locale={props.locale}
+            />
         </div>
     )
 }
